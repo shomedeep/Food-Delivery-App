@@ -1,24 +1,26 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose, { mongo } from 'mongoose';
+import { AdminRoute, VandorRoute } from './routes'
 
-import { AdminRoute, VandorRoute } from './routes';
-import { MONGO_URI } from './configs';
+import { MONGO_URI } from './configs'
+import bodyParser from 'body-parser'
+import express from 'express'
+import mongoose from 'mongoose'
 
-const app = express();
+const app = express()
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/admin', AdminRoute);
-app.use('/vandor', VandorRoute);
+app.use('/admin', AdminRoute)
+app.use('/vandor', VandorRoute)
 
-
-mongoose.connect(MONGO_URI).then(result=>{
-  console.log("DB connection established");
-}).catch(err=>console.log(`error: ${err} ---------------`));
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log('DB connection established')
+  })
+  .catch((err) => console.log(`error: ${err}`))
 
 app.listen(8000, () => {
-  console.clear();
-  console.log('App is listening to the port 8000');
-});
+  // console.clear();
+  console.log('App is listening to the port 8000')
+})

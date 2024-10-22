@@ -1,19 +1,19 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose'
 
 interface VandorDoc extends Document {
-  name: string;
-  ownerName: string;
-  foodType: [string];
-  pincode: string;
-  address: string;
-  phone: string;
-  email: string;
-  password: string;
-  salt: string;
-  serviceAvailable: boolean;
-  coverImages: [string];
-  rating: number;
-  foods: any;
+  name: string
+  ownerName: string
+  foodType: [string]
+  pincode: string
+  address: string
+  phone: string
+  email: string
+  password: string
+  salt: string
+  serviceAvailable: boolean
+  coverImages: [string]
+  rating: number
+  foods: any
 }
 
 const VandorSchema = new Schema(
@@ -33,24 +33,24 @@ const VandorSchema = new Schema(
     foods: [
       {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'food',
-      },
-    ],
+        ref: 'food'
+      }
+    ]
   },
   {
     toJSON: {
       transform(doc, ret) {
-        delete ret.password;
-        delete ret.salt;
-        delete ret.__v;
-        delete ret.createdAt;
-        delete ret.updatedAt;
-      },
+        delete ret.password
+        delete ret.salt
+        delete ret.__v
+        delete ret.createdAt
+        delete ret.updatedAt
+      }
     },
-    timestamps: true,
-  },
-);
+    timestamps: true
+  }
+)
 
-const Vandor = mongoose.model<VandorDoc>('vandor', VandorSchema);
+const Vandor = mongoose.model<VandorDoc>('vandor', VandorSchema)
 
-export { Vandor };
+export { Vandor }
